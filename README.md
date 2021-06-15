@@ -1,10 +1,10 @@
-# AzerothCore Server Status
+# AzerothCore World Boss Rank
 
 This is a simple web application built with Angular2+ and Bootstrap to show the online players list of a AzerothCore server.
 
 It is based on the [AzerothAPI](https://github.com/AzerothJS/AzerothAPI).
 
-![Server Status](https://raw.githubusercontent.com/azerothcore/world-boss-rank/master/icon.png)
+![World Boss Rank](https://raw.githubusercontent.com/azerothcore/world-boss-rank/master/icon.png)
 
 ### Installation
 
