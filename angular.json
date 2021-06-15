@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "server-status": {
+    "world-boss-ranking": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/server-status",
+            "outputPath": "dist/world-boss-rank",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "server-status:build"
+            "browserTarget": "world-boss-rank:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "server-status:build:production"
+              "browserTarget": "world-boss-rank:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "server-status:build"
+            "browserTarget": "world-boss-rank:build"
           }
         },
         "test": {
@@ -115,15 +115,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "server-status:serve"
+            "devServerTarget": "world-boss-rank:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "server-status:serve:production"
+              "devServerTarget": "world-boss-rank:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "server-status"
+  "defaultProject": "world-boss-rank"
 }

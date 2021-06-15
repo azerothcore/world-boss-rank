@@ -4,20 +4,20 @@ This is a simple web application built with Angular2+ and Bootstrap to show the 
 
 It is based on the [AzerothAPI](https://github.com/AzerothJS/AzerothAPI).
 
-![Server Status](https://raw.githubusercontent.com/azerothcore/server-status/master/icon.png)
+![Server Status](https://raw.githubusercontent.com/azerothcore/world-boss-rank/master/icon.png)
 
 ### Installation
 
 The application require the [AzerothAPI](https://github.com/AzerothJS/AzerothAPI) to access to the characters database.
 
-Clone the Server-Status folder inside your web server directory:  
+Clone the world-boss-rank folder inside your web server directory:
 ```
-git clone https://github.com/azerothcore/server-status.git
+git clone https://github.com/azerothcore/world-boss-rank.git
 ```
 Then copy the file `config.ts.dist` to `config.ts`, open it and set properly with the path of the API and the server name.
 
 ### Contribute
-You can help us [opening a new issue](https://github.com/azerothcore/server-status/issues/new) to report a bug or a suggestion  
+You can help us [opening a new issue](https://github.com/azerothcore/world-boss-rank/issues/new) to report a bug or a suggestion
 
 or you can donate to support us
 

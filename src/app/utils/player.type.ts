@@ -6,9 +6,4 @@ export class PlayerType {
   class: number;
   gender: number;
   level: number;
-  map: number;
-  instance_id: number;
-  zone: number;
-  guildId: number;
-  guildName: string;
 }

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SERVER_NAME } from 'config';
 import { AppService } from './app.service';
-import { SERVER_NAME, PULSE_DAYS } from 'config';
-import { map } from './utils/zone';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,4 @@ export class AppComponent {
   constructor(public service: AppService) { }
 
   readonly SERVER_NAME = SERVER_NAME;
-  readonly PULSE = PULSE_DAYS;
-  readonly map = map;
-
 }

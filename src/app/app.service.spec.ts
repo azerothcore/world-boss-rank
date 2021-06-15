@@ -1,10 +1,7 @@
-import { TestBed, async, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
+import { async, getTestBed, TestBed } from '@angular/core/testing';
 import { AppService } from './app.service';
-import { PlayerType } from './utils/player.type';
-import { API_URL, PULSE_DAYS } from 'config';
-import { Pulse } from './utils/pulse.type';
+
 
 describe('AppService', () => {
   let httpMock: HttpTestingController;
@@ -56,50 +53,6 @@ describe('AppService', () => {
     expect(service.allianceCount).toBe(5);
 
     expect(service['getFaction'](13)).toBe('');
-  });
-
-  it('players observable should work correctly', () => {
-    const service: AppService = TestBed.get(AppService);
-    const mockData: PlayerType[] = [{
-      guid: 1,
-      name: 'Helias',
-      race: 7,
-      class: 8,
-      gender: 0,
-      level: 80,
-      map: 1,
-      instance_id: 0,
-      zone: 876,
-      guildId: 1,
-      guildName: 'AzerothCore'
-    }];
-
-    mockData[0].faction = 'alliance';
-
-    service.players$.subscribe((data) => {
-      expect(data).toEqual(mockData);
-    });
-
-    const req = httpMock.expectOne(`${API_URL}/characters/online`);
-    expect(req.request.method).toBe('GET');
-    req.flush(mockData);
-  });
-
-  it('pulse observable should work correctly', () => {
-    const service: AppService = TestBed.get(AppService);
-    const mockData: Pulse = {
-      accounts: 3,
-      IPs: 1
-    };
-
-    service.pulse$.subscribe((data) => {
-      expect(data).toEqual(mockData);
-    });
-
-    const req = httpMock.expectOne(`${API_URL}/auth/pulse/${PULSE_DAYS}`);
-    expect(req.request.method).toBe('GET');
-    req.flush(mockData);
-
   });
 
 });
