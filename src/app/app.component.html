@@ -1,0 +1,48 @@
+<div class="container text-center">
+  <p class="h2 mt-5">{{ SERVER_NAME }} World Bosses Rank</p>
+  <br>
+
+  <div *ngIf="(service.players$ | async) as players; else loading">
+    <br>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <th class="text-center">Character</th>
+          <th class="text-center">Class</th>
+          <th class="text-center">Race</th>
+          <th class="text-center">Faction</th>
+          <th class="text-center">Level</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Encounter</th>
+          <th class="text-center">Difficulty</th>
+          <th class="text-center">Group Type</th>
+          <th class="text-center">Duration</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let player of players" [ngClass]="player.faction">
+            <td><strong>{{ player.name }}</strong></td>
+            <td><img [src]="'assets/class/' + player.class + '.gif'"></td>
+            <td><img [src]="'assets/race/' + player.race + '-' + player.gender + '.gif'"></td>
+            <td><img [src]="'assets/' + player.faction + '_min.png'"></td>
+            <td><strong>{{ player.level }}</strong></td>
+            <td>{{ service.timestamp(player.time_stamp) }}</td>
+            <td>{{ player.encounter }}</td>
+            <td>{{ player.difficulty }}</td>
+            <td>{{ player.group_type }}</td>
+            <td>{{ player.duration }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <br>
+    Loading data from API...
+    <br>
+  </ng-template>
+
+  <br>
+  <!-- I worked for free to build this software, please do not remove the credit! -->
+  <p class="small">Designed by <a target="_blank" href="https://github.com/FrancescoBorzi/">ShinDarth</a> && <a target="_blank" href="https://github.com/Helias/">Helias</a></p>
+</div>
