@@ -31,16 +31,9 @@ export class AppService {
   private _hordeCount = 0;
   private _allianceCount = 0;
   private _players$: Observable<PlayerType[]> = this.http.get<PlayerType[]>(`${API_URL}/eluna/eventscript_encounters`)
-    .pipe(
-      map((data) => {
-        data.forEach((player, idx) => {
-          data[idx].faction = this.getFaction(player.race);
-        });
-        return data;
-      })
-    );
+    .pipe(map(data => this.handleFaction(data)));
 
-  private _scores$ = this.http.get(`${API_URL}/eluna/eventscript_score`);
+  private _scores$ = this.http.get(`${API_URL}/eluna/eventscript_score`).pipe(map(data => this.handleFaction(data)));
 
   private getFaction(race: number): string {
     switch (race) {
@@ -62,6 +55,13 @@ export class AppService {
       default:
         return '';
     }
+  }
+
+  private handleFaction(data: any): any[] {
+    return data.map((d, idx) => {
+      d.faction = this.getFaction(d.race);
+      return d;
+    });
   }
 
   public timestamp(unix_timestamp): string {

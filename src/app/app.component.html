@@ -50,13 +50,21 @@
         <div *ngIf="(service.scores$ | async) as scores; else loading">
           <table class="table table-striped table-bordered">
             <thead>
-              <th class="text-center">Account</th>
+              <th class="text-center">Character</th>
+              <th class="text-center">Class</th>
+              <th class="text-center">Race</th>
+              <th class="text-center">Faction</th>
+              <th class="text-center">Level</th>
               <th class="text-center">Current Score</th>
               <th class="text-center">Total Score</th>
             </thead>
             <tbody>
-              <tr *ngFor="let score of scores">
-                <td>{{ score.account_id }}</td>
+              <tr *ngFor="let score of scores" [ngClass]="score.faction">
+                <td><strong>{{ score.name }}</strong></td>
+                <td><img [src]="'assets/class/' + score.class + '.gif'"></td>
+                <td><img [src]="'assets/race/' + score.race + '-' + score.gender + '.gif'"></td>
+                <td><img [src]="'assets/' + score.faction + '_min.png'"></td>
+                <td><strong>{{ score.level }}</strong></td>
                 <td>{{ score.score_earned_current }}</td>
                 <td>{{ score.score_earned_total }}</td>
               </tr>
