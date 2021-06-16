@@ -14,11 +14,23 @@ export class AppService {
 
   get hordeCount()    { return this._hordeCount;    }
   get allianceCount() { return this._allianceCount; }
-  get players$()       { return this._players$;       }
+  get players$()      { return this._players$;      }
+  get scores$()       { return this._scores$;       }
+
+  currentBoss = 1;
+
+  handleBoss(currentBoss): void {
+    this.currentBoss = currentBoss;
+  }
+
+  filterBoss(data): [] {
+    console.log(data);
+    return data.filter(d => d.encounter == this.currentBoss);
+  }
 
   private _hordeCount = 0;
   private _allianceCount = 0;
-  private _players$: Observable<PlayerType[]> = this.http.get<PlayerType[]>(API_URL + '/eluna/eventscript_encounters')
+  private _players$: Observable<PlayerType[]> = this.http.get<PlayerType[]>(`${API_URL}/eluna/eventscript_encounters`)
     .pipe(
       map((data) => {
         data.forEach((player, idx) => {
@@ -27,6 +39,8 @@ export class AppService {
         return data;
       })
     );
+
+  private _scores$ = this.http.get(`${API_URL}/eluna/eventscript_score`);
 
   private getFaction(race: number): string {
     switch (race) {

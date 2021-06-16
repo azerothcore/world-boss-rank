@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    TabsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
