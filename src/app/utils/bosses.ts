@@ -1,6 +1,6 @@
 export const BOSSES = [
-  { id: 1, name: 'Boss 1' },
-  { id: 2, name: 'Boss 2' },
-  { id: 3, name: 'Boss 3' },
-  { id: 4, name: 'Boss 4' },
+  { id: 1112001, name: 'Glorifrir Flintshoulder', },
+  { id: 1112003, name: 'Zombie Captain', },
+  { id: 1112011, name: 'Pondulum of Deem', },
+  { id: 1112013, name: 'Seawitch', },
 ];

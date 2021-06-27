@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { API_URL } from 'config';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BOSSES } from './utils/bosses';
 import { PlayerType } from './utils/player.type';
 
 @Injectable({
@@ -17,14 +18,13 @@ export class AppService {
   get players$()      { return this._players$;      }
   get scores$()       { return this._scores$;       }
 
-  currentBoss = 1;
+  currentBoss = BOSSES[0].id;
 
   handleBoss(currentBoss): void {
     this.currentBoss = currentBoss;
   }
 
   filterBoss(data): [] {
-    console.log(data);
     return data.filter(d => d.encounter == this.currentBoss);
   }
 
