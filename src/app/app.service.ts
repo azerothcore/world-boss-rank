@@ -25,7 +25,11 @@ export class AppService {
   }
 
   filterBoss(data): [] {
-    return data.filter(d => d.encounter == this.currentBoss);
+    return data.filter(d => d.encounter == this.currentBoss).map(d => {
+      console.log(d.group_type);
+      d.group_type = d.group_type == 1 ? 'Party' : 'Raid';
+      return d;
+    });
   }
 
   private _hordeCount = 0;
