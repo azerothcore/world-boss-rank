@@ -13,4 +13,15 @@ export class AppComponent {
 
   readonly SERVER_NAME = SERVER_NAME;
   readonly BOSSES = BOSSES;
+
+  readonly ENCOUNTERS_COLUMNS = [
+    'Character',
+    'Class',
+    'Race',
+    'Faction',
+    'Level',
+    'Date',
+    'Difficulty',
+    'Duration',
+  ];
 }

@@ -25,17 +25,24 @@ export class AppService {
   }
 
   filterBoss(data): [] {
-    return data.filter(d => d.encounter == this.currentBoss).map(d => {
-      console.log(d.group_type);
-      d.group_type = d.group_type == 1 ? 'Party' : 'Raid';
-      return d;
-    });
+    return data
+      .filter(d => d.bossId == this.currentBoss)
+      .map(d => {
+        d.group_type = d.group_type === 1 ? 'Party' : 'Raid';
+        return d;
+      });
   }
 
   private _hordeCount = 0;
   private _allianceCount = 0;
   private _players$: Observable<PlayerType[]> = this.http.get<PlayerType[]>(`${API_URL}/eluna/eventscript_encounters`)
-    .pipe(map(data => this.handleFaction(data)));
+    .pipe(
+      map(data => this.handleFaction(data)),
+      map(data => data.map(d => {
+        d.bossId = this.getPartyOrRaidEntry(d.encounter, d.group_type);
+        return d;
+      })),
+    );
 
   private _scores$ = this.http.get(`${API_URL}/eluna/eventscript_score`).pipe(map(data => this.handleFaction(data)));
 
@@ -62,7 +69,7 @@ export class AppService {
   }
 
   private handleFaction(data: any): any[] {
-    return data.map((d, idx) => {
+    return data.map((d) => {
       d.faction = this.getFaction(d.race);
       return d;
     });
@@ -81,4 +88,11 @@ export class AppService {
 
     return time;
   }
+
+  // RaidEntry = 10*(encounterId - 1) + 1112000 + 1
+  // PartyEntry = 10*(encounterId - 1) + 1112000 + 3
+  private getPartyOrRaidEntry(encounter: number, group_type: number): number {
+    return 10 * (encounter -1) + 1112000 + (group_type === 1 ? 3 : 1);
+  }
+
 }

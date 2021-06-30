@@ -2,7 +2,7 @@
   <p class="h2 mt-5">{{ SERVER_NAME }} World Bosses Rank</p>
   <br>
 
-    <tabset>
+    <tabset *ngIf="(service.players$ | async) as encounters; else loading">
       <tab heading="Encounters" id="Encounters">
 
         <div class="mt-2">
@@ -12,20 +12,11 @@
           </select>
         </div>
 
-        <div *ngIf="(service.players$ | async) as encounters; else loading" class="mt-3">
+        <div class="mt-3">
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead>
-                <th class="text-center">Character</th>
-                <th class="text-center">Class</th>
-                <th class="text-center">Race</th>
-                <th class="text-center">Faction</th>
-                <th class="text-center">Level</th>
-                <th class="text-center">Date</th>
-                <th class="text-center">Encounter</th>
-                <th class="text-center">Difficulty</th>
-                <th class="text-center">Group Type</th>
-                <th class="text-center">Duration</th>
+                <th class="text-center" *ngFor="let column of ENCOUNTERS_COLUMNS">{{ column }}</th>
               </thead>
               <tbody>
                 <tr *ngFor="let player of service.filterBoss(encounters)" [ngClass]="player.faction">
@@ -35,9 +26,7 @@
                   <td><img [src]="'assets/' + player.faction + '_min.png'"></td>
                   <td><strong>{{ player.level }}</strong></td>
                   <td>{{ service.timestamp(player.time_stamp) }}</td>
-                  <td>{{ player.encounter }}</td>
                   <td>{{ player.difficulty }}</td>
-                  <td>{{ player.group_type }}</td>
                   <td>{{ player.duration }}</td>
                 </tr>
               </tbody>
