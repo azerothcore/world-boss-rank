@@ -16,7 +16,7 @@ export class AppService {
   get hordeCount()    { return this._hordeCount;    }
   get allianceCount() { return this._allianceCount; }
   get players$()      { return this._players$;      }
-  get scores$()       { return this._scores$;       }
+  // get scores$()       { return this._scores$;       }
 
   currentBoss = BOSSES[0].id;
 
@@ -44,7 +44,7 @@ export class AppService {
       })),
     );
 
-  private _scores$ = this.http.get(`${API_URL}/eluna/eventscript_score`).pipe(map(data => this.handleFaction(data)));
+  // private _scores$ = this.http.get(`${API_URL}/eluna/eventscript_score`).pipe(map(data => this.handleFaction(data)));
 
   private getFaction(race: number): string {
     switch (race) {
