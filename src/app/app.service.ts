@@ -83,12 +83,16 @@ export class AppService {
     const year = ts.getFullYear();
     const month = months[ts.getMonth()];
     const date = ts.getDate();
-    const hour = ts.getHours();
-    const min = ts.getMinutes();
-    const sec = ts.getSeconds();
+    const hour = this.paddingTime(ts.getHours());
+    const min = this.paddingTime(ts.getMinutes());
+    const sec = this.paddingTime(ts.getSeconds());
     const time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
 
     return time;
+  }
+
+  private paddingTime(time: number): string | number {
+    return time.toString().length < 2 ? '0' + time : time;
   }
 
   // RaidEntry = 10*(encounterId - 1) + 1112000 + 1
