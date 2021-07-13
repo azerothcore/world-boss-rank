@@ -9,19 +9,8 @@ import { BOSSES } from './utils/bosses';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public service: AppService) { }
+  constructor(public service: AppService) {}
 
   readonly SERVER_NAME = SERVER_NAME;
   readonly BOSSES = BOSSES;
-
-  readonly ENCOUNTERS_COLUMNS = [
-    'Character',
-    'Class',
-    'Race',
-    'Faction',
-    'Level',
-    'Date',
-    'Difficulty',
-    'Duration',
-  ];
 }
