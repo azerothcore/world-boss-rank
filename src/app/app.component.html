@@ -23,7 +23,7 @@
               <td><img [src]="'assets/race/' + player.race + '-' + player.gender + '.gif'"></td>
               <td><img [src]="'assets/' + player.faction + '_min.png'"></td>
               <td><strong>{{ player.level }}</strong></td>
-              <td>{{ service.timestamp(player.time_stamp) }}</td>
+              <td>{{ player.time_stamp }}</td>
               <td>{{ player.difficulty }}</td>
               <td>{{ player.duration }}</td>
             </tr>

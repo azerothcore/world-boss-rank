@@ -40,6 +40,8 @@ export class AppService {
       map(data => this.handleFaction(data)),
       map(data => data.map(d => {
         d.bossId = this.getPartyOrRaidEntry(d.encounter, d.group_type);
+        d.time_stamp = this.timestamp(d.time_stamp);
+        d.duration = this.millisToMinutesAndSeconds(d.duration);
         return d;
       })),
     );
@@ -75,7 +77,7 @@ export class AppService {
     });
   }
 
-  public timestamp(unix_timestamp): string {
+  private timestamp(unix_timestamp): string {
     const ts = new Date(unix_timestamp * 1000);
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const year = ts.getFullYear();
@@ -93,6 +95,16 @@ export class AppService {
   // PartyEntry = 10*(encounterId - 1) + 1112000 + 3
   private getPartyOrRaidEntry(encounter: number, group_type: number): number {
     return 10 * (encounter -1) + 1112000 + (group_type === 1 ? 3 : 1);
+  }
+
+  private millisToMinutesAndSeconds(millis: number): string {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = Number(((millis % 60000) / 1000).toFixed(0));
+    return (
+      seconds == 60
+      ? (minutes+1) + ":00"
+      : minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+    );
   }
 
 }
