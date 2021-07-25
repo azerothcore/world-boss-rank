@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Sort } from '@angular/material/sort';
 import { API_URL } from 'config';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -32,6 +31,7 @@ export class AppService {
   handleBoss(currentBoss): void {
     this.currentBoss = currentBoss;
     this.encounters = this.filterBoss(this.players);
+    console.log(JSON.parse(JSON.stringify(this.encounters)));
   }
 
   private filterBoss(data: any): [] {
@@ -40,7 +40,12 @@ export class AppService {
       .map(d => {
         d.group_type = d.group_type === 1 ? 'Party' : 'Raid';
         return d;
-      });
+      })
+      .sort((a, b) =>
+        a.difficulty == b.difficulty
+        ? b.duration - a.duration
+        : b.difficulty - a.difficulty
+      );
   }
 
   private _hordeCount = 0;
@@ -120,32 +125,4 @@ export class AppService {
       : minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     );
   }
-
-  sortData(sort: Sort) {
-    const data = this.players?.slice();
-    if (!sort.active || sort.direction === '') {
-      this.encounters = data;
-      return;
-    }
-
-    this.encounters = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'name': return this.compare(a.name, b.name, isAsc);
-        case 'class': return this.compare(a.class, b.class, isAsc);
-        case 'race': return this.compare(a.race, b.race, isAsc);
-        case 'faction': return this.compare(a.faction, b.faction, isAsc);
-        case 'level': return this.compare(a.level, b.level, isAsc);
-        case 'timeStamp': return this.compare(a.timeStamp, b.timeStamp, isAsc);
-        case 'difficulty': return this.compare(a.difficulty, b.difficulty, isAsc);
-        case 'duration': return this.compare(a.duration, b.duration, isAsc);
-        default: return 0;
-      }
-    });
-  }
-
-  private compare(a: number | string, b: number | string, isAsc: boolean) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }
-
 }
