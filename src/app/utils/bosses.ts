@@ -9,4 +9,6 @@ export const BOSSES = [
   { id: 1112023, name: "Aligator Minion" },
   { id: 1112041, name: "Crocolisk Rundee" },
   { id: 1112043, name: "Aligator Guard" },
+  { id: 1112051, name: "One-Three-Three-Seven" },
+  { id: 1112053, name: "Ragnaros Qt" },
 ];
